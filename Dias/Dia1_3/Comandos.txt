@@ -1,0 +1,7 @@
+
+Instalar WSL, VS Code, Docker, PostgreSQL, e outras ferramentas necessárias.
+Configurar ambientes de desenvolvimento e contêineres Docker.
+
+Instalar VS Code
+Baixe o instalador do Visual Studio Code do site oficial.
+Execute o instalador e siga as instruções.
