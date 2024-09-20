@@ -5,3 +5,45 @@ Configurar ambientes de desenvolvimento e contêineres Docker.
 Instalar VS Code
 Baixe o instalador do Visual Studio Code do site oficial.
 Execute o instalador e siga as instruções.
+
+apt-get install docker
+
+sudo su -
+
+sudo service docker start
+docker run hello-world
+
+docker run --name postgres-container -e POSTGRES_PASSWORD=mysecretpassword -d -p 6000:5432 postgres
+
+mkdir data_analysis_project
+cd data_analysis_project
+
+python3 -m venv venv
+source venv/bin/activate
+
+pip install pandas numpy matplotlib seaborn sqlalchemy jupyter psycopg2-binary
+
+# Crie um arquivo chamado test_setup.py
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
+
+# Conecte-se ao PostgreSQL
+engine = create_engine('postgresql://postgres:mysecretpassword@localhost:5432/postgres')
+
+# Crie um DataFrame simples
+df = pd.DataFrame({
+    'A': np.random.rand(10),
+    'B': np.random.rand(10)
+})
+
+# Salve o DataFrame no PostgreSQL
+df.to_sql('test_table', engine, if_exists='replace')
+
+# Leia os dados de volta do PostgreSQL
+df_from_db = pd.read_sql('test_table', engine)
+
+
+
+python test_setup.py
